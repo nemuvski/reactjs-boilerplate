@@ -1,0 +1,4 @@
+/dist
+webpack.*.js
+.eslintrc.js
+.prettierrc.js

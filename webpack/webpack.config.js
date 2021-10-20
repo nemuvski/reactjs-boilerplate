@@ -1,0 +1,49 @@
+const path = require('path')
+const htmlWebpackPlugin = require('html-webpack-plugin')
+const eslintWebpackPlugin = require('eslint-webpack-plugin')
+
+const ROOT_DIR_PATH = path.resolve(__dirname, '..')
+const ENTRY_FILENAME = 'index.tsx'
+const OUTPUT_DIRNAME = 'dist'
+const DEV_SERVER_PORT = 3000
+
+module.exports = {
+  entry: path.resolve(ROOT_DIR_PATH, 'src', ENTRY_FILENAME),
+  resolve: {
+    modules: [path.resolve(ROOT_DIR_PATH, 'node_modules')],
+    extensions: ['.js', '.jsx', '.ts', '.tsx'],
+    alias: {
+      '~': path.resolve(ROOT_DIR_PATH, 'src'),
+    },
+  },
+  output: {
+    path: path.join(ROOT_DIR_PATH, OUTPUT_DIRNAME),
+    filename: 'app.[contenthash].js',
+  },
+  module: {
+    rules: [
+      {
+        test: /\.[jt]sx?$/,
+        use: [
+          {
+            loader: 'babel-loader',
+            options: {
+              presets: ['@babel/preset-env', '@babel/preset-react', '@babel/preset-typescript'],
+            },
+          },
+        ],
+      },
+    ],
+  },
+  plugins: [
+    new htmlWebpackPlugin({
+      template: path.resolve(ROOT_DIR_PATH, 'src', 'index.html'),
+    }),
+    new eslintWebpackPlugin({
+      extensions: ['ts', 'tsx', 'js', 'jsx'],
+    }),
+  ],
+  devServer: {
+    port: DEV_SERVER_PORT,
+  },
+}
