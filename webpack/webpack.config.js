@@ -2,6 +2,7 @@ const path = require('path')
 const terserPlugin = require('terser-webpack-plugin')
 const htmlWebpackPlugin = require('html-webpack-plugin')
 const eslintWebpackPlugin = require('eslint-webpack-plugin')
+const miniCssExtractPlugin = require('mini-css-extract-plugin')
 
 const ROOT_DIR_PATH = path.resolve(__dirname, '..')
 const ENTRY_FILENAME = 'index.tsx'
@@ -34,6 +35,13 @@ module.exports = {
           },
         ],
       },
+      {
+        test: /\.css$/,
+        use: [
+          miniCssExtractPlugin.loader,
+          'css-loader',
+        ],
+      },
     ],
   },
   optimization: {
@@ -56,6 +64,9 @@ module.exports = {
     }),
     new eslintWebpackPlugin({
       extensions: ['ts', 'tsx', 'js', 'jsx'],
+    }),
+    new miniCssExtractPlugin({
+      filename: '[name].[contenthash].css',
     }),
   ],
   devServer: {
