@@ -1,4 +1,5 @@
 const path = require('path')
+const terserPlugin = require('terser-webpack-plugin')
 const htmlWebpackPlugin = require('html-webpack-plugin')
 const eslintWebpackPlugin = require('eslint-webpack-plugin')
 
@@ -34,6 +35,18 @@ module.exports = {
         ],
       },
     ],
+  },
+  optimization: {
+    minimize: true,
+    minimizer: [new terserPlugin({
+      terserOptions: {
+        compress: {
+          // 次のものはproductionモードのときに除かれる
+          pure_funcs: ['console.log', 'console.info', 'console.warn', 'console.debug'],
+        },
+      },
+      extractComments: 'all',
+    })],
   },
   plugins: [
     new htmlWebpackPlugin({
