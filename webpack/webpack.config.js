@@ -19,7 +19,7 @@ module.exports = {
   },
   output: {
     path: path.join(ROOT_DIR_PATH, OUTPUT_DIRNAME),
-    filename: 'app.[contenthash].js',
+    filename: '[name].[contenthash].js',
   },
   module: {
     rules: [
