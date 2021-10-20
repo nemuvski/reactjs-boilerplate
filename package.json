@@ -7,7 +7,7 @@
     "eslint:check": "eslint --ext .js,.jsx,.ts,.tsx .",
     "prettier:check": "prettier --check './**/*.{js,jsx,ts,tsx}'",
     "start": "webpack serve --mode=development --config=webpack/webpack.config.js",
-    "build": "webpack --mode=production --config=webpack/webpack.config.js"
+    "build": "yarn clean && webpack build --mode=production --config=webpack/webpack.config.js"
   },
   "dependencies": {
     "react": "^17.0.2",
