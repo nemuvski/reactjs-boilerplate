@@ -10,7 +10,7 @@
 - Prettier
 - Webpack
 
-ビルド設定のカスタマイズは `webpack/webpack.config.cjs` でご参照ください。
+ビルド設定のカスタマイズは `webpack/webpack.config.cjs` を編集してください。
 
 ## コマンド
 
