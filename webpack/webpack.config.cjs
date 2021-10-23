@@ -1,6 +1,7 @@
 const webpack = require('webpack')
 const path = require('path')
 const dotenv = require('dotenv-webpack')
+const copyPlugin = require('copy-webpack-plugin')
 const terserPlugin = require('terser-webpack-plugin')
 const htmlWebpackPlugin = require('html-webpack-plugin')
 const eslintWebpackPlugin = require('eslint-webpack-plugin')
@@ -8,8 +9,10 @@ const miniCssExtractPlugin = require('mini-css-extract-plugin')
 const headerMessage = require('./scripts/header-message.cjs')
 
 const ROOT_DIR_PATH = path.resolve(__dirname, '..')
+const SRC_DIR_PATH = path.join(ROOT_DIR_PATH, 'src')
+const STATIC_DIR_PATH = path.join(ROOT_DIR_PATH, 'static')
+const OUTPUT_DIR_PATH = path.join(ROOT_DIR_PATH, 'dist')
 const ENTRY_FILENAME = 'index.tsx'
-const OUTPUT_DIRNAME = 'dist'
 const DEV_SERVER_PORT = 3000
 
 module.exports = (env, argv) => {
@@ -20,16 +23,16 @@ module.exports = (env, argv) => {
   headerMessage(mode, appVersion)
 
   return {
-    entry: path.resolve(ROOT_DIR_PATH, 'src', ENTRY_FILENAME),
+    entry: path.resolve(SRC_DIR_PATH, ENTRY_FILENAME),
     resolve: {
       modules: [path.resolve(ROOT_DIR_PATH, 'node_modules')],
       extensions: ['.js', '.jsx', '.ts', '.tsx'],
       alias: {
-        '~': path.resolve(ROOT_DIR_PATH, 'src'),
+        '~': SRC_DIR_PATH,
       },
     },
     output: {
-      path: path.join(ROOT_DIR_PATH, OUTPUT_DIRNAME),
+      path: OUTPUT_DIR_PATH,
       filename: '[name].[contenthash].js',
     },
     module: {
@@ -75,8 +78,16 @@ module.exports = (env, argv) => {
         // ファイルがない場合を考慮
         silent: true,
       }),
+      new copyPlugin({
+        patterns: [
+          {
+            from: STATIC_DIR_PATH,
+            to: OUTPUT_DIR_PATH,
+          },
+        ],
+      }),
       new htmlWebpackPlugin({
-        template: path.resolve(ROOT_DIR_PATH, 'src', 'index.html'),
+        template: path.join(SRC_DIR_PATH, 'index.html'),
         // テンプレートで利用する変数
         APP_VERSION: appVersion,
       }),
