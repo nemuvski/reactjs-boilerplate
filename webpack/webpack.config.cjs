@@ -39,7 +39,7 @@ module.exports = (env, argv) => {
     module: {
       rules: [
         {
-          test: /\.[jt]sx?$/,
+          test: /\.[jt]sx?$/i,
           use: [
             {
               loader: 'babel-loader',
@@ -50,7 +50,7 @@ module.exports = (env, argv) => {
           ],
         },
         {
-          test: /\.css$/,
+          test: /\.css$/i,
           use: [miniCssExtractPlugin.loader, 'css-loader'],
         },
         {
