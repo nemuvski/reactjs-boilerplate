@@ -34,6 +34,7 @@ module.exports = (env, argv) => {
     output: {
       path: OUTPUT_DIR_PATH,
       filename: '[name].[contenthash].js',
+      assetModuleFilename: 'images/[hash][ext][query]',
     },
     module: {
       rules: [
@@ -51,6 +52,10 @@ module.exports = (env, argv) => {
         {
           test: /\.css$/,
           use: [miniCssExtractPlugin.loader, 'css-loader'],
+        },
+        {
+          test: /\.(svg|gif|jpe?g|png|webp)$/i,
+          type: 'asset/resource',
         },
       ],
     },
