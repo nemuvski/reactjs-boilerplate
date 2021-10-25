@@ -40,14 +40,7 @@ module.exports = (env, argv) => {
       rules: [
         {
           test: /\.[jt]sx?$/i,
-          use: [
-            {
-              loader: 'babel-loader',
-              options: {
-                presets: ['@babel/preset-env', '@babel/preset-react', '@babel/preset-typescript'],
-              },
-            },
-          ],
+          use: ['babel-loader'],
         },
         {
           test: /\.css$/i,
