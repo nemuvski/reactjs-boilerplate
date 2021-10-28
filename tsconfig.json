@@ -4,6 +4,10 @@
     "paths": {
       "~/*": ["src/*"]
     },
+    "typeRoots": [
+      "node_modules/@types",
+      "src/types"
+    ],
     "target": "es5",
     "jsx": "react-jsx",
     "module": "esnext",
