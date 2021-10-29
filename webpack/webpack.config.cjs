@@ -73,6 +73,7 @@ module.exports = (env, argv) => {
     plugins: [
       new webpack.EnvironmentPlugin({
         APP_VERSION: appVersion,
+        PUBLIC_PATH,
       }),
       new dotenv({
         path: path.join(ROOT_DIR_PATH, `.env.${mode}`),
