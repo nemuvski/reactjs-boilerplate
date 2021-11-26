@@ -1,6 +1,7 @@
 import { resolve } from 'path'
 import { defineConfig } from 'vite'
 import react from '@vitejs/plugin-react'
+import { minifyHtml, injectHtml } from 'vite-plugin-html'
 
 const BASE_PATH = '/'
 const CLIENT_PUBLIC_ENV_PREFIX = 'PUBLIC_'
@@ -9,7 +10,10 @@ const PUBLIC_ASSETS_DIR_PATH = resolve(__dirname, 'static')
 const OUTPUT_DIR_PATH = resolve(__dirname, 'dist')
 const ENV_DIR_PATH = __dirname
 
-export default defineConfig(() => {
+export default defineConfig(({ mode }) => {
+  const isProductionMode = mode === 'production'
+  const appVersion = isProductionMode ? process.env.npm_package_version : `${process.env.npm_package_version}-${mode}`
+
   return {
     root: ROOT_DIR_PATH,
     publicDir: PUBLIC_ASSETS_DIR_PATH,
@@ -21,7 +25,7 @@ export default defineConfig(() => {
       emptyOutDir: true,
       manifest: true,
     },
-    plugins: [react()],
+    plugins: [react(), minifyHtml(), injectHtml({ injectData: { APP_VERSION: appVersion } })],
     resolve: {
       alias: [{ find: '~', replacement: ROOT_DIR_PATH }],
     },
