@@ -2,6 +2,7 @@ import { resolve } from 'path'
 import { defineConfig } from 'vite'
 import react from '@vitejs/plugin-react'
 import { minifyHtml, injectHtml } from 'vite-plugin-html'
+import eslintPlugin from 'vite-plugin-eslint'
 
 const BASE_PATH = '/'
 const CLIENT_PUBLIC_ENV_PREFIX = 'PUBLIC_'
@@ -25,7 +26,12 @@ export default defineConfig(({ mode }) => {
       emptyOutDir: true,
       manifest: true,
     },
-    plugins: [react(), minifyHtml(), injectHtml({ injectData: { APP_VERSION: appVersion } })],
+    plugins: [
+      react(),
+      eslintPlugin({ cache: true, fix: false, throwOnWarning: true, throwOnError: true }),
+      minifyHtml(),
+      injectHtml({ injectData: { APP_VERSION: appVersion } }),
+    ],
     resolve: {
       alias: [{ find: '~', replacement: ROOT_DIR_PATH }],
     },
