@@ -14,6 +14,7 @@ const ENV_DIR_PATH = __dirname
 export default defineConfig(({ mode }) => {
   const isProductionMode = mode === 'production'
   const appVersion = isProductionMode ? process.env.npm_package_version : `${process.env.npm_package_version}-${mode}`
+  const esbuildPure = isProductionMode ? ['console.log', 'console.info', 'console.debug', 'console.trace'] : undefined
 
   return {
     root: ROOT_DIR_PATH,
@@ -25,6 +26,9 @@ export default defineConfig(({ mode }) => {
       outDir: OUTPUT_DIR_PATH,
       emptyOutDir: true,
       manifest: true,
+    },
+    esbuild: {
+      pure: esbuildPure,
     },
     plugins: [
       react(),
