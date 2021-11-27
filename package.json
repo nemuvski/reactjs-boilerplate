@@ -2,6 +2,7 @@
   "name": "reactjs-boilerplate",
   "version": "0.1.0",
   "license": "MIT",
+  "private": true,
   "scripts": {
     "clean": "rimraf dist node_modules/.vite",
     "eslint:check": "eslint --ext .js,.jsx,.ts,.tsx .",
