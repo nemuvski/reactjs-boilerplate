@@ -35,8 +35,6 @@ export default defineConfig(({ mode }) => {
       eslintPlugin({ cache: true, fix: false, throwOnWarning: true, throwOnError: true }),
       createHtmlPlugin({
         minify: true,
-        entry: 'index.tsx',
-        template: 'index.html',
         inject: {
           data: {
             appVersion,
