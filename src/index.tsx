@@ -1,10 +1,10 @@
 import React from 'react'
-import ReactDOM from 'react-dom'
+import { createRoot } from 'react-dom/client'
 import App from '~/components/App'
 
-ReactDOM.render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>,
-  document.getElementById('app')
-)
+const container = document.getElementById('app')
+
+if (!container) throw new Error('Oops, root element is missing.')
+
+const root = createRoot(container)
+root.render(<App />)
