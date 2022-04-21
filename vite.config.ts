@@ -1,8 +1,8 @@
 import { resolve } from 'path'
-import { defineConfig } from 'vite'
 import react from '@vitejs/plugin-react'
-import { createHtmlPlugin } from 'vite-plugin-html'
+import { defineConfig } from 'vite'
 import eslintPlugin from 'vite-plugin-eslint'
+import { createHtmlPlugin } from 'vite-plugin-html'
 
 const BASE_PATH = '/'
 const CLIENT_PUBLIC_ENV_PREFIX = 'PUBLIC_'

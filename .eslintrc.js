@@ -23,7 +23,7 @@ module.exports = {
       version: 'detect',
     },
   },
-  plugins: ['react', 'react-hooks', '@typescript-eslint', 'regexp'],
+  plugins: ['react', 'react-hooks', '@typescript-eslint', 'regexp', 'import'],
   rules: {
     semi: 'off',
     'comma-dangle': ['error', 'only-multiline'],
@@ -33,5 +33,15 @@ module.exports = {
     'react/prop-types': 'off',
     'react-hooks/rules-of-hooks': 'error',
     'react-hooks/exhaustive-deps': 'warn',
+    'import/order': [
+      'warn',
+      {
+        groups: ['builtin', 'external', 'internal', 'parent', 'sibling', 'index', 'object', 'type'],
+        pathGroups: [],
+        pathGroupsExcludedImportTypes: ['builtin', 'external'],
+        alphabetize: { order: 'asc', caseInsensitive: true },
+        warnOnUnassignedImports: true,
+      },
+    ],
   },
 }
