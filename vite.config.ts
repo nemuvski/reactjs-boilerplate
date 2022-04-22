@@ -32,7 +32,7 @@ export default defineConfig(({ mode }) => {
     },
     plugins: [
       react(),
-      eslintPlugin({ cache: true, fix: false, throwOnWarning: true, throwOnError: true }),
+      eslintPlugin({ throwOnWarning: true, throwOnError: true }),
       createHtmlPlugin({
         minify: true,
         inject: {
