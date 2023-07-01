@@ -1,7 +1,7 @@
 module.exports = {
   env: {
     browser: true,
-    es2021: true,
+    es2020: true,
   },
   extends: [
     'eslint:recommended',
@@ -13,10 +13,7 @@ module.exports = {
   ],
   parser: '@typescript-eslint/parser',
   parserOptions: {
-    ecmaFeatures: {
-      jsx: true,
-    },
-    ecmaVersion: 13,
+    ecmaVersion: 'latest',
     sourceType: 'module',
   },
   settings: {
@@ -24,7 +21,7 @@ module.exports = {
       version: 'detect',
     },
   },
-  plugins: ['react', 'react-hooks', '@typescript-eslint', 'regexp', 'import'],
+  plugins: ['react', 'react-hooks', '@typescript-eslint', 'regexp', 'import', 'react-refresh'],
   rules: {
     semi: 'off',
     'comma-dangle': ['error', 'only-multiline'],
@@ -46,5 +43,6 @@ module.exports = {
         warnOnUnassignedImports: true,
       },
     ],
+    'react-refresh/only-export-components': 'warn',
   },
 }
